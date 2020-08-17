@@ -21,9 +21,6 @@ turma <- "202008-r4ds-2"
 ```{r, eval=FALSE}
 install.packages("remotes")
 
-# instalar pacotes com bases de dados
-remotes::install_github("curso-r/basesCursoR")
-
 # instalar pacote da Curso-R
 remotes::install_github("curso-r/CursoR")
 
