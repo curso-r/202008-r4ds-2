@@ -39,8 +39,12 @@ CursoR::atualizar_material()
 
 ## Slides
 
-| slide | link |
-| :---- | :--- |
+| slide                                  | link                                                                           |
+| :------------------------------------- | :----------------------------------------------------------------------------- |
+| slides/01-introducao-ao-curso.html     | <https://curso-r.github.io/main-r4ds-2/slides/01-introducao-ao-curso.html>     |
+| slides/02-organizacao-de-projetos.html | <https://curso-r.github.io/main-r4ds-2/slides/02-organizacao-de-projetos.html> |
+| slides/03-dplyr-plus.html              | <https://curso-r.github.io/main-r4ds-2/slides/03-dplyr-plus.html>              |
+| slides/08-shiny.html                   | <https://curso-r.github.io/main-r4ds-2/slides/08-shiny.html>                   |
 
 ## Scripts usados em aula
 

@@ -10,8 +10,8 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-main_repo <- "main-r4ds2"
-turma <- "202008-r4ds2"
+main_repo <- "main-r4ds-2"
+turma <- "202008-r4ds-2"
 ```
 
 ## Configuração inicial
