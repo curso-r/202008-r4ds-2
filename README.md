@@ -45,5 +45,6 @@ CursoR::atualizar_material()
 
 ## Scripts usados em aula
 
-| script | link |
-| :----- | :--- |
+| script     | link                                                   |
+| :--------- | :----------------------------------------------------- |
+| 01-dplyr.R | <https://curso-r.github.io/202008-r4ds-2/R/01-dplyr.R> |

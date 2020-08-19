@@ -60,7 +60,7 @@ knitr::kable(
 knitr::kable(
   tibble::tibble(
     script = list.files("R/", pattern = ".R"),
-    link = paste0("https://curso-r.github.io/", turma, "/exemplos/", script)
+    link = paste0("https://curso-r.github.io/", turma, "/R/", script)
   )
 )
 ```
