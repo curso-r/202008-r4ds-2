@@ -10,6 +10,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
+library(magrittr)
 main_repo <- "main-r4ds-2"
 turma <- "202008-r4ds-2"
 ```
@@ -50,7 +51,8 @@ knitr::kable(
   tibble::tibble(
     slide = CursoR:::list_github_files(main_repo, "slides/", "html"),
     link = paste0("https://curso-r.github.io/", main_repo, "/", slide)
-  )
+  ) %>% 
+    dplyr::filter(!stringr::str_detect(slide, "_files/"))
 )
 ```
 
