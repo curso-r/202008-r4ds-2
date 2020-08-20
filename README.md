@@ -36,12 +36,18 @@ CursoR::atualizar_material()
 
 ## Slides
 
-| slide                                  | link                                                                           |
-| :------------------------------------- | :----------------------------------------------------------------------------- |
-| slides/01-introducao-ao-curso.html     | <https://curso-r.github.io/main-r4ds-2/slides/01-introducao-ao-curso.html>     |
-| slides/02-organizacao-de-projetos.html | <https://curso-r.github.io/main-r4ds-2/slides/02-organizacao-de-projetos.html> |
-| slides/032-tidyr.html                  | <https://curso-r.github.io/main-r4ds-2/slides/032-tidyr.html>                  |
-| slides/08-shiny.html                   | <https://curso-r.github.io/main-r4ds-2/slides/08-shiny.html>                   |
+| slide                                                 | link                                                                                         |
+| :---------------------------------------------------- | :------------------------------------------------------------------------------------------- |
+| slides/01-introducao-ao-curso.html                    | <https://curso-r.github.io/main-r4ds-2/slides/01-introducao-ao-curso.html>                   |
+| slides/021-organizacao-de-projetos.html               | <https://curso-r.github.io/main-r4ds-2/slides/021-organizacao-de-projetos.html>              |
+| slides/022-exemplo-analise-projeto.html               | <https://curso-r.github.io/main-r4ds-2/slides/022-exemplo-analise-projeto.html>              |
+| slides/022-exemplo-analise-projeto\_files/figure-html | <https://curso-r.github.io/main-r4ds-2/slides/022-exemplo-analise-projeto_files/figure-html> |
+| slides/023-exemplo-analise-pacote.html                | <https://curso-r.github.io/main-r4ds-2/slides/023-exemplo-analise-pacote.html>               |
+| slides/023-exemplo-analise-pacote\_files/figure-html  | <https://curso-r.github.io/main-r4ds-2/slides/023-exemplo-analise-pacote_files/figure-html>  |
+| slides/031-dplyr.html                                 | <https://curso-r.github.io/main-r4ds-2/slides/031-dplyr.html>                                |
+| slides/032-tidyr.html                                 | <https://curso-r.github.io/main-r4ds-2/slides/032-tidyr.html>                                |
+| slides/032-tidyr\_files/figure-html                   | <https://curso-r.github.io/main-r4ds-2/slides/032-tidyr_files/figure-html>                   |
+| slides/08-shiny.html                                  | <https://curso-r.github.io/main-r4ds-2/slides/08-shiny.html>                                 |
 
 ## Scripts usados em aula
 
