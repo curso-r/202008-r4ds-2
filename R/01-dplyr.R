@@ -6,18 +6,20 @@ library(dplyr)
 # bind_rows ---------------------------------------------------------------
 
 # Juntando duas bases
-imdb_2015 <- readr::read_rds("data-raw/rds/imdb_2015.rds")
-imdb_2016 <- readr::read_rds("data-raw/rds/imdb_2016.rds")
+imdb_2015 <- readr::read_rds("data/imdb_por_ano/imdb_2015.rds")
+imdb_2016 <- readr::read_rds("data/imdb_por_ano/imdb_2016.rds")
 
 bind_rows(imdb_2015, imdb_2016)
 rbind(imdb_2015, imdb_2016)
 
 # Juntando várias bases
 
-arquivos <- list.files("data-raw/rds/imdb_por_ano/", full.names = TRUE)
+arquivos <- list.files("data/imdb_por_ano/", full.names = TRUE)
 
-arquivos %>%
-  purrr::map(readr::read_rds) %>%
+purrr::map(
+  arquivos,
+  readr::read_rds
+) %>%
   bind_rows()
 
 # rbind() não funciona com listas
@@ -76,9 +78,9 @@ case_when(
 mtcars %>%
   mutate(
     mpg_cat = case_when(
-      mpg < 15 ~ "economico",
+      mpg < 15 ~ "bebe bem",
       mpg < 22 ~ "regular",
-      mpg >= 22 ~ "bebe bem"
+      mpg >= 22 ~ "economico"
     )
   )
 
@@ -86,11 +88,12 @@ mtcars %>%
 mtcars %>%
   mutate(
     mpg_cat = case_when(
-      mpg < 15 ~ "economico",
+      mpg < 15 ~ "bebe bem",
       mpg < 22 ~ "regular",
-      TRUE ~ "bebe bem"
+      TRUE ~ "economico"
     )
-  )
+  ) %>%
+  select(mpg, mpg_cat)
 
 # first, last -------------------------------------------------------------
 
@@ -114,6 +117,10 @@ tab %>%
   mutate(
     inicio = first(var),
     fim = last(var)
+  ) %>%
+  ungroup() %>%
+  mutate(
+    diferenca = fim - var
   )
 
 # na_if -------------------------------------------------------------------
@@ -121,27 +128,31 @@ tab %>%
 # Transforma um valor especificado em `NA`
 
 tab <- tibble::tibble(
-  var = c(1, 10, 2, -99, 10, -99)
+  var = c(1, 10, 2, -99, 10, -99),
+  var2 = c(-99, -99, 2, -99, 10, -99)
 )
 
 tab %>%
   mutate(var = na_if(var, -99))
 
+na_if(tab, -99)
+
 # coalesce ----------------------------------------------------------------
 
 tab <- tibble::tibble(
   var1 = c(1, 2, NA, 2, 10, NA, NA),
-  var2 = c(NA, 2, 2, 10, 3, 0, NA)
+  var2 = c(NA, 2, 2, 10, 3, 0, NA),
+  var3 = c(1, 1, 1, 1, 1, 1, 1)
 )
 
 tab %>%
-  mutate(var3 = coalesce(var1, var2))
+  mutate(var4 = coalesce(var1, var2, var3))
 
 # Você também pode usar para substituir os NAs de
 # uma variável por um único valor
 
 tab %>%
-  mutate(var3 = coalesce(var1, 33))
+  mutate(var1 = coalesce(var1, 33))
 
 # Mas, neste caso, você também poderia usar a função
 # tidyr::replace_na().
@@ -149,6 +160,9 @@ tab %>%
 tab %>%
   tidyr::replace_na(replace = list(var1 = 33, var2 = 66))
 
+# solução r-base
+tab %>%
+  replace(is.na(.), 0)
 
 # lag, lead ---------------------------------------------------------------
 
@@ -174,8 +188,13 @@ tab %>%
 
 # Devolve uma coluna da base (como vetor)
 mtcars %>%
-  pull(mpg)
+  # 1 milhão de manipulação
+  pull(mpg) %>%
+  mean()
 
+mtcars %>% select(mpg, cyl)
+
+mean(mtcars$mpg)
 
 # sample_n, sample_frac ---------------------------------------------------
 
@@ -210,7 +229,8 @@ ames %>%
   summarise(
     lote_area_media = mean(lote_area, na.rm = TRUE),
     venda_valor_medio = mean(venda_valor, na.rm = TRUE)
-  )
+  ) %>%
+  ungroup()
 
 # ou
 ames %>%
@@ -385,223 +405,4 @@ tab_notas %>%
 
 # A função rowwise() vai ser útil quando estivermos
 # trabalhando com list-columns!
-
-# 3. tidyr ----------------------------------------------------------------
-
-library(tidyr)
-
-imdb <- readr::read_rds("data/imdb.rds")
-
-View(imdb)
-
-# unite -------------------------------------------------------------------
-
-# Como pegar todos os filmes que um determinado
-# ator participa, independentemente da
-# importância do papel?
-
-# Vamos usar a função unite()
-
-imdb %>%
-  unite(col = "atores", starts_with("ator"), sep = "|") %>%
-  View()
-
-# Pegando todos os filmes que o Will Smith aparece
-imdb %>%
-  unite(col = "atores", starts_with("ator"), sep = "|") %>%
-  filter(stringr::str_detect(atores, "Will Smith")) %>%
-  View()
-
-# separate ----------------------------------------------------------------
-
-# A função separate() é a operação contrária da função unite()
-
-imdb %>%
-  unite(col = "atores", starts_with("ator"), sep = "|") %>%
-  separate(
-    col = "atores",
-    into = c("ator_1", "ator_2", "ator_3"),
-    sep = "\\|"
-  )
-
-# Essa função também pode ser utilizada
-# quando o número de categorias em cada
-# linha não é igual.
-
-imdb %>%
-  separate(
-    col = "generos",
-    into = c("genero_1", "genero_2", "genero_3"),
-    sep = "\\|"
-  ) %>%
-  View()
-
-# pivotagem ---------------------------------------------------------------
-
-# pivot_longer
-
-imdb %>%
-  pivot_longer(
-    cols = starts_with("ator"),
-    names_to = "posicao",
-    values_to = "ator"
-  ) %>%
-  View()
-
-# Podemos usar essa nova estrutura para
-# filtrar os filmes em que um
-# determinado ator participa
-
-imdb %>%
-  pivot_longer(
-    cols = starts_with("ator"),
-    names_to = "posicao",
-    values_to = "ator"
-  ) %>%
-  filter(ator == "Will Smith") %>%
-  View()
-
-# pivot_wider
-
-tab_romance_terror <- imdb %>%
-  filter(ano >= 2010) %>%
-  mutate(
-    genero = case_when(
-      stringr::str_detect(generos, "Romance") ~ "Romance",
-      stringr::str_detect(generos, "Horror") ~ "Horror",
-      TRUE ~ NA_character_
-    )
-  ) %>%
-  filter(!is.na(genero)) %>%
-  group_by(ano, genero) %>%
-  summarise(
-    receita_media = mean(receita, na.rm = TRUE)
-  )
-
-tab_romance_terror %>%
-  pivot_wider(
-    names_from = "ano",
-    values_from = "receita_media"
-  ) %>%
-  View()
-
-# É a operação contrária do pivot_longer
-
-imdb %>%
-  pivot_longer(
-    cols = starts_with("ator"),
-    names_to = "posicao",
-    values_to = "ator"
-  ) %>%
-  pivot_wider(
-    names_from = "posicao",
-    values_from = "ator"
-  )
-
-# Essas funções são muito utilizadas na
-# hora de fazer alguns gráficos
-
-library(ggplot2)
-
-mtcars %>%
-  pivot_longer(
-    cols = -mpg,
-    names_to = "variavel",
-    values_to = "valor"
-  ) %>%
-  ggplot(aes(x = valor, y = mpg)) +
-  geom_point() +
-  facet_wrap(~variavel, scales = "free")
-
-
-# Listas ------------------------------------------------------------------
-
-# Listas são uma estrutura importante dentro
-# do R pois todos os data.frames (tibbles)
-# são listas.
-
-class(mtcars)
-is.list(mtcars)
-
-class(starwars)
-is.list(starwars)
-
-# Criamos uma lista usando a função list()
-
-list(1, "a", TRUE)
-
-# Veja que, diferente de um vetor, podemos
-# guardar objetos de classes diferentes.
-
-# Podemos dar nomes à cada posição
-
-list(cliente = "Ana Silva", idade = 25, estado_civil = NA)
-
-# Cada posição pode ser um vetor, de mesmo
-# tamanho ou não
-
-list(
-  cliente = c("Ana Silva", "Bruno Santos"),
-  idade = c(25, 30),
-  estado_civil = c(NA, "Solteira(o)")
-)
-
-# Um data frame nada mais é do que uma lista nomeda
-# com vetores de mesmo tamanho
-
-list(
-  cliente = c("Ana Silva", "Bruno Santos"),
-  idade = c(25, 30),
-  estado_civil = c(NA, "Solteira(o)")
-) %>%
-  as.data.frame()
-
-# A única diferença (relevante) entre eles
-# é que um data frame possui o atributo "dimensão"
-
-lista <- list(
-  cliente = c("Ana Silva", "Bruno Santos"),
-  idade = c(25, 30),
-  estado_civil = c(NA, "Solteira(o)")
-)
-
-dim(lista)
-
-dim(as.data.frame(lista))
-
-# nest/unnest -------------------------------------------------------------
-
-# Utilizamos as funções nest() e unnest()
-# para criarmos/desfazermos list-columns
-
-# nest
-
-imdb_nest <- imdb %>%
-  group_by(ano) %>%
-  nest()
-
-# unnest
-
-imdb_nest %>%
-  unnest(cols = "data")
-
-# podemos manipular list-columns usando a
-# a funcão purrr::map()
-
-fazer_grafico_dispersao <- function(tab) {
-  tab %>%
-    ggplot(aes(x = orcamento, y = receita)) +
-    geom_point()
-}
-
-imdb_graficos <- imdb %>%
-  group_by(ano) %>%
-  nest() %>%
-  mutate(
-    grafico = purrr::map(data, fazer_grafico_dispersao)
-  )
-
-imdb_graficos$grafico[[1]]
-
-# Veremos mais sobre list-columns na aula de purrr!
 

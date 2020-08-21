@@ -51,3 +51,4 @@ CursoR::atualizar_material()
 | script     | link                                                   |
 | :--------- | :----------------------------------------------------- |
 | 01-dplyr.R | <https://curso-r.github.io/202008-r4ds-2/R/01-dplyr.R> |
+| 02-tidyr.R | <https://curso-r.github.io/202008-r4ds-2/R/02-tidyr.R> |
