@@ -37,10 +37,14 @@ imdb %>%
   geom_col() +
   labs(fill = "Ano")
 
-0: pc = github
-1: trabalhando
-2: pc > github
-2.5: stage
-3: commit
-4: push
-5: pc = github
+# 0: pc = github
+# 1: trabalhando
+# 2: pc > github
+# 2.5: stage
+# 3: commit
+# 4: push
+# 5: pc = github
+# 6: outra pessoa trabalha
+# 7: outra pessoa commit, push
+# 8: pc < github
+# 9: pull

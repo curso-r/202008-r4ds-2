@@ -214,8 +214,19 @@ glimpse(ames)
 
 # Documentação
 
+install.packages("AmesHousing")
+AmesHousing::ames_raw
+
 # remotes::install_github("curso-r/basesCursoR")
 help(ames, package = "basesCursoR")
+
+base %>%
+  group_by(variavel_agrupadora) %>%
+  summarise(
+    coluna1 = mean(coluna1),
+    coluna2 = mean(coluna2),
+    ...
+  )
 
 # across ------------------------------------------------------------------
 
@@ -229,28 +240,50 @@ ames %>%
   summarise(
     lote_area_media = mean(lote_area, na.rm = TRUE),
     venda_valor_medio = mean(venda_valor, na.rm = TRUE)
-  ) %>%
-  ungroup()
+  )
 
 # ou
 ames %>%
   group_by(geral_qualidade) %>%
   summarise_at(
     .vars = vars(lote_area, venda_valor),
-    ~mean(.x, na.rm = TRUE)
+    .funs = mean,
+    na.rm = TRUE
   )
 
 # Agora, usamos a função across
 ames %>%
   group_by(geral_qualidade) %>%
-  summarise(across(
-    .cols = c(lote_area, venda_valor),
-    .fns = mean, na.rm = TRUE
-  ))
+  summarise(
+    across(
+      .cols = c("lote_area", "venda_valor"),
+      .fns = mean,
+      na.rm = TRUE
+    )
+  )
+
+ames %>%
+  group_by(geral_qualidade) %>%
+  summarise(
+    across(
+      .cols = c("lote_area"),
+      .fns = sum,
+      na.rm = TRUE
+    ),
+    across(
+      .cols = c("venda_valor"),
+      .fns = mean,
+      na.rm = TRUE
+    )
+  )
 
 # Podemos aplicar facilmente uma função a todas
 # as colunas de uma base
-ames %>% summarise(across(.fns = n_distinct))
+ames %>% summarise(across(
+  .cols = contains("area"),
+  .fns = n_distinct
+  )) %>%
+  View
 
 # Antes usávamos o sufixo "_all"
 ames %>%
@@ -264,7 +297,10 @@ ames %>%
 # Com ele, podemos aplicar uma função a todas as
 # colunas de um tipo
 ames %>%
-  summarise(across(where(is.character), n_distinct))
+  summarise(across(
+    where(is.character),
+    n_distinct
+  )) %>% View
 
 ames %>%
   summarise(across(where(is.numeric), mean, na.rm = TRUE))
@@ -274,11 +310,15 @@ ames %>%
   summarise_if(is.character, n_distinct)
 
 ames %>%
-  summarise_if(is.numeric, ~mean(.x, na.rm = TRUE))
+  summarise_if(is.numeric, mean, na.rm = TRUE)
 
 # Também podemos combinar as ações do
 # `summarise_if()` e `summarise_at()`
 # em um único `across()`.
+
+funcao_media <- function(.x) {
+  mean(.x, na.rm = TRUE)
+}
 
 ames %>%
   summarise(
@@ -287,7 +327,8 @@ ames %>%
       mean,
       na.rm = TRUE
     )
-  )
+  ) %>%
+  View()
 
 # Agora, podemos fazer sumarizações complexas
 ames %>%
@@ -297,6 +338,7 @@ ames %>%
     across(where(is.character), ~sum(is.na(.x))),
     n_obs = n(),
   ) %>%
+  glimpse()
   View()
 
 # Isso não era possível com as funções antigas!
@@ -309,23 +351,31 @@ ames %>%
 # Vamos transformar todas as colunas de área
 # para obtermos medidas em metros quadrados
 # em vez de pés quadrados.
+transformar_em_metros_quad <- function(.x) {
+  .x / 10.764
+}
+
 ames %>%
   mutate(across(
     contains("area"),
     ~ .x / 10.764
-  ))
+  )) %>%
+  View()
 
 # filter()
 # Pegar todas as casas com varanda aberta,
 # cerca e lareira
 ames %>%
   filter(across(
-    c(varanda_aberta_area, cerca_qualidade, lareira_qualidade),
+    c(
+      varanda_aberta_area,
+      cerca_qualidade,
+      lareira_qualidade
+    ),
     ~!is.na(.x)
   )) %>%
   # select(c(varanda_aberta_area, cerca_qualidade, lareira_qualidade)) %>%
   View()
-
 
 # select, rename ----------------------------------------------------------
 
@@ -336,11 +386,35 @@ ames %>%
 ames %>%
   select(contains("qualidade") & where(is.character))
 
+ames %>%
+  select(contains("qualidade"))
+
 # Para renomer várias colunas, utilizamos
 # a função rename_with()
 
 ames %>%
   rename_with(toupper, contains("venda"))
+
+ames %>%
+  rename_with(
+    stringr::str_replace_all,
+    .cols = everything(),
+    pattern = "_",
+    replacement = " "
+  )
+
+ames %>%
+  rename_with(
+    snakecase::to_title_case
+  )
+
+janitor::clean_names()
+
+ames %>%
+  rename(
+    contains("venda"),
+    toupper
+  )
 
 # relocate ----------------------------------------------------------------
 
@@ -350,6 +424,8 @@ ames %>%
 ames %>%
   relocate(venda_valor)
 
+ames %>%
+  select(venda_valor, everything())
 
 # Os argumentos .before e .after
 # podem ser usados para fazer
@@ -376,7 +452,9 @@ tab_notas <- tibble(
 
 # Isso não vai funcionar
 
-tab_notas %>% mutate(media = mean(c(prova1, prova2, prova3, prova4)))
+tab_notas %>% mutate(
+  media = mean(c(prova1, prova2, prova3, prova4))
+)
 
 # Podemos usar o group_by()
 
@@ -387,7 +465,8 @@ tab_notas %>%
 # E também a função c_across()
 
 tab_notas %>%
-  group_by(student_id) %>%
+  mutate(id = 1:n()) %>%
+  group_by(id) %>%
   mutate(media = mean(c_across(starts_with("prova"))))
 
 # Podemos trocar o group_by() por rowwise()

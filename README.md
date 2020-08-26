@@ -44,11 +44,14 @@ CursoR::atualizar_material()
 | slides/023-exemplo-analise-pacote.html  | <https://curso-r.github.io/main-r4ds-2/slides/023-exemplo-analise-pacote.html>  |
 | slides/031-dplyr.html                   | <https://curso-r.github.io/main-r4ds-2/slides/031-dplyr.html>                   |
 | slides/032-tidyr.html                   | <https://curso-r.github.io/main-r4ds-2/slides/032-tidyr.html>                   |
+| slides/04-stringr.html                  | <https://curso-r.github.io/main-r4ds-2/slides/04-stringr.html>                  |
 | slides/08-shiny.html                    | <https://curso-r.github.io/main-r4ds-2/slides/08-shiny.html>                    |
 
 ## Scripts usados em aula
 
-| script     | link                                                   |
-| :--------- | :----------------------------------------------------- |
-| 01-dplyr.R | <https://curso-r.github.io/202008-r4ds-2/R/01-dplyr.R> |
-| 02-tidyr.R | <https://curso-r.github.io/202008-r4ds-2/R/02-tidyr.R> |
+| script             | link                                                          |
+| :----------------- | :------------------------------------------------------------ |
+| 01-dplyr.R         | <https://curso-r.github.io/202008-r4ds-2/R/01-dplyr.R>        |
+| 02-tidyr.R         | <https://curso-r.github.io/202008-r4ds-2/R/02-tidyr.R>        |
+| duvidas\_aula\_3.R | <https://curso-r.github.io/202008-r4ds-2/R/duvidas_aula_3.R>  |
+| exemplo\_funcoes.R | <https://curso-r.github.io/202008-r4ds-2/R/exemplo_funcoes.R> |

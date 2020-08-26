@@ -1,6 +1,7 @@
 # 2. tidyr ----------------------------------------------------------------
 
 library(tidyr)
+library(dplyr)
 
 imdb <- readr::read_rds("data/imdb.rds")
 
@@ -34,7 +35,8 @@ imdb %>%
     col = "atores",
     into = c("ator_1", "ator_2", "ator_3"),
     sep = "\\|"
-  )
+  ) %>%
+  View
 
 # Essa função também pode ser utilizada
 # quando o número de categorias em cada
@@ -43,14 +45,14 @@ imdb %>%
 imdb %>%
   separate(
     col = "generos",
-    into = c("genero_1", "genero_2", "genero_3"),
+    into = c("genero_1", "genero_2", "genero_3", "genero_4"),
     sep = "\\|"
   ) %>%
   View()
 
 # pivotagem ---------------------------------------------------------------
 
-# pivot_longer
+# pivot_longer (antigo gather)
 
 imdb %>%
   pivot_longer(
@@ -71,7 +73,7 @@ imdb %>%
     values_to = "ator"
   ) %>%
   filter(ator == "Will Smith") %>%
-  View()
+  nrow()
 
 # pivot_wider
 
