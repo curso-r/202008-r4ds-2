@@ -75,7 +75,7 @@ imdb %>%
   filter(ator == "Will Smith") %>%
   nrow()
 
-# pivot_wider
+# pivot_wider (antiga spread)
 
 tab_romance_terror <- imdb %>%
   filter(ano >= 2010) %>%
@@ -142,7 +142,7 @@ is.list(starwars)
 
 # Criamos uma lista usando a função list()
 
-list(1, "a", TRUE)
+list(1, "a", TRUE, mtcars)
 
 # Veja que, diferente de um vetor, podemos
 # guardar objetos de classes diferentes.
@@ -194,6 +194,8 @@ imdb_nest <- imdb %>%
   group_by(ano) %>%
   nest()
 
+imdb_nest$data[[1]]
+
 # unnest
 
 imdb_nest %>%
@@ -208,6 +210,9 @@ fazer_grafico_dispersao <- function(tab) {
     geom_point()
 }
 
+p <- ggplot(imdb) +
+  geom_point(aes(x = orcamento, y = receita))
+
 imdb_graficos <- imdb %>%
   group_by(ano) %>%
   nest() %>%
@@ -216,6 +221,8 @@ imdb_graficos <- imdb %>%
   )
 
 imdb_graficos$grafico[[1]]
+
+purrr::walk(imdb_graficos$grafico, print)
 
 # Veremos mais sobre list-columns na aula de purrr!
 
