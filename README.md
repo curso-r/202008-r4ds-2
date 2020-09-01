@@ -47,7 +47,7 @@ CursoR::atualizar_material()
 | slides/041-stringr.html                 | <https://curso-r.github.io/main-r4ds-2/slides/041-stringr.html>                 |
 | slides/042-lubridate.html               | <https://curso-r.github.io/main-r4ds-2/slides/042-lubridate.html>               |
 | slides/043-purrr.html                   | <https://curso-r.github.io/main-r4ds-2/slides/043-purrr.html>                   |
-| slides/08-shiny.html                    | <https://curso-r.github.io/main-r4ds-2/slides/08-shiny.html>                    |
+| slides/05-ggplot2-plus.html             | <https://curso-r.github.io/main-r4ds-2/slides/05-ggplot2-plus.html>             |
 
 ## Scripts usados em aula
 
