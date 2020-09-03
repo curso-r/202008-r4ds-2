@@ -48,6 +48,7 @@ CursoR::atualizar_material()
 | slides/042-lubridate.html               | <https://curso-r.github.io/main-r4ds-2/slides/042-lubridate.html>               |
 | slides/043-purrr.html                   | <https://curso-r.github.io/main-r4ds-2/slides/043-purrr.html>                   |
 | slides/05-ggplot2-plus.html             | <https://curso-r.github.io/main-r4ds-2/slides/05-ggplot2-plus.html>             |
+| slides/06-shiny.html                    | <https://curso-r.github.io/main-r4ds-2/slides/06-shiny.html>                    |
 
 ## Scripts usados em aula
 
@@ -55,6 +56,9 @@ CursoR::atualizar_material()
 | :------------------ | :-------------------------------------------------------------- |
 | 01-dplyr.R          | <https://curso-r.github.io/202008-r4ds-2/R/01-dplyr.R>          |
 | 02-tidyr.R          | <https://curso-r.github.io/202008-r4ds-2/R/02-tidyr.R>          |
+| 041-ola-mundo.R     | <https://curso-r.github.io/202008-r4ds-2/R/041-ola-mundo.R>     |
+| 042-output.R        | <https://curso-r.github.io/202008-r4ds-2/R/042-output.R>        |
+| 043-output-input.R  | <https://curso-r.github.io/202008-r4ds-2/R/043-output-input.R>  |
 | 3-ggplot2.R         | <https://curso-r.github.io/202008-r4ds-2/R/3-ggplot2.R>         |
 | duvidas\_aula\_3.R  | <https://curso-r.github.io/202008-r4ds-2/R/duvidas_aula_3.R>    |
 | exemplo\_funcoes.R  | <https://curso-r.github.io/202008-r4ds-2/R/exemplo_funcoes.R>   |
