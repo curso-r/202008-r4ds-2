@@ -62,4 +62,5 @@ CursoR::atualizar_material()
 | 3-ggplot2.R         | <https://curso-r.github.io/202008-r4ds-2/R/3-ggplot2.R>         |
 | duvidas\_aula\_3.R  | <https://curso-r.github.io/202008-r4ds-2/R/duvidas_aula_3.R>    |
 | exemplo\_funcoes.R  | <https://curso-r.github.io/202008-r4ds-2/R/exemplo_funcoes.R>   |
+| exemplo-shinydash.R | <https://curso-r.github.io/202008-r4ds-2/R/exemplo-shinydash.R> |
 | extra-curly-curly.R | <https://curso-r.github.io/202008-r4ds-2/R/extra-curly-curly.R> |

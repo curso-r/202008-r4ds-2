@@ -194,7 +194,7 @@ library(ggplot2)
 
 rick_and_morty <- readr::read_rds("data/rick_and_morty.rds")
 
-img_rick <- png::readPNG("data-raw/rick.png") %>%
+img_rick <- png::readPNG("R/rick.png") %>%
   grid::rasterGrob()
 
 # Um gráfico de linha
@@ -215,6 +215,51 @@ rick_and_morty %>%
   geom_col()
 
 # Construindo o tema
+
+rick_and_morty %>%
+  mutate(num_temporada = as.factor(num_temporada)) %>%
+  ggplot(aes(
+    x = num_episodio,
+    y = qtd_espectadores_EUA,
+    fill = num_temporada)
+  ) +
+  annotation_custom(img_rick, xmin = 35, ymin = 2) +
+  geom_col() +
+  labs(
+    title = "Rick and Morty",
+    x = "episodio",
+    y = "audiencia",
+    fill = "Temporada"
+  ) +
+  # scale_fill_manual(values = c("")) +
+  theme(
+    legend.position = "bottom",
+    plot.background = element_rect(fill = "black"),
+    legend.background = element_rect(fill = "black"),
+    panel.background = element_rect(fill = "black"),
+    plot.title = element_text(
+      color = "#11a2c6",
+      hjust = 0.5,
+      size = 30
+    ),
+    text = element_text(
+      color = "#11a2c6",
+      family = "Get Schwifty"
+    ),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.y = element_line(
+      size = 0.1
+    ),
+    axis.text = element_text(
+      color = "white",
+      size = 12
+    ),
+    axis.ticks.x = element_blank()
+  )
+
+
 
 rick_and_morty %>%
   mutate(num_temporada = as.factor(num_temporada)) %>%
@@ -312,8 +357,9 @@ rick_and_morty %>%
     y = "audiencia",
     title = "Rick and Morty"
   ) +
-  annotation_custom(img_rick, xmin = 35, ymin = 2) +
-  tema_rick_and_morty()
+  annotation_custom(img_rick, xmin = 35, ymin = 2)
+
+theme_set(tema_rick_and_morty())
 
 
 # Extensões do ggplot2 ----------------------------------------------------
@@ -374,7 +420,7 @@ covid %>%
 
 # Colocando ponto
 
-covid %>%
+p <- covid %>%
   filter(
     !is.na(municipio)
   ) %>%
@@ -415,6 +461,8 @@ covid %>%
   geom_line(show.legend = FALSE) +
   geom_label(aes(label = estado), show.legend = FALSE) +
   transition_reveal(data)
+
+gganimate::anim_save(filename = "algumNome.gif")
 
 # gghighlight
 
@@ -460,6 +508,8 @@ ames %>%
   )
 
 # Também funciona com linhas
+covid <- readr::read_rds("data/covid.rds")
+
 covid %>%
   filter(
     !is.na(municipio)

@@ -1,16 +1,37 @@
 library(shiny)
 
 ui <- fluidPage(
-  "Um histograma",
+  "Um  histograma",
   plotOutput("hist")
 )
 
 server <- function(input, output, session) {
-  
-  output$hist <- renderPlot({
+
+  output$hist <- renderPlot(
     hist(mtcars$mpg)
-  })
-  
+  )
+
 }
 
 shinyApp(ui, server)
+
+
+
+
+
+# library(shiny)
+#
+# ui <- fluidPage(
+#   "Um histograma",
+#   plotOutput("hist")
+# )
+#
+# server <- function(input, output, session) {
+#
+#   output$hist <- renderPlot({
+#     hist(mtcars$mpg)
+#   })
+#
+# }
+#
+# shinyApp(ui, server)
