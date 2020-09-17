@@ -41,7 +41,6 @@ CursoR::atualizar_material()
 | slides/01-introducao-ao-curso.html      | <https://curso-r.github.io/main-r4ds-2/slides/01-introducao-ao-curso.html>      |
 | slides/021-organizacao-de-projetos.html | <https://curso-r.github.io/main-r4ds-2/slides/021-organizacao-de-projetos.html> |
 | slides/022-exemplo-analise-projeto.html | <https://curso-r.github.io/main-r4ds-2/slides/022-exemplo-analise-projeto.html> |
-| slides/023-exemplo-analise-pacote.html  | <https://curso-r.github.io/main-r4ds-2/slides/023-exemplo-analise-pacote.html>  |
 | slides/031-dplyr.html                   | <https://curso-r.github.io/main-r4ds-2/slides/031-dplyr.html>                   |
 | slides/032-tidyr.html                   | <https://curso-r.github.io/main-r4ds-2/slides/032-tidyr.html>                   |
 | slides/041-stringr.html                 | <https://curso-r.github.io/main-r4ds-2/slides/041-stringr.html>                 |
