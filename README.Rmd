@@ -67,4 +67,15 @@ knitr::kable(
 )
 ```
 
+## Trabalhos finais
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+tab <- googlesheets4::read_sheet(ss = googlesheets4::as_sheets_id("1Qvgvx74CPfl5HZtiOBEUGlFulklMh05gHS7sxE6JFT4"))
+
+tab %>% 
+  dplyr::filter(turma == "202008-r4ds-2") %>% 
+  dplyr::select(Aluno = aluno, Link = link) %>% 
+  knitr::kable()
+```
+
 

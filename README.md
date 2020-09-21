@@ -66,3 +66,23 @@ CursoR::atualizar_material()
 | exemplo\_funcoes.R            | <https://curso-r.github.io/202008-r4ds-2/R/exemplo_funcoes.R>             |
 | exemplo-shinydash.R           | <https://curso-r.github.io/202008-r4ds-2/R/exemplo-shinydash.R>           |
 | extra-curly-curly.R           | <https://curso-r.github.io/202008-r4ds-2/R/extra-curly-curly.R>           |
+
+## Trabalhos finais
+
+| Aluno                       | Link                                                                                                |
+| :-------------------------- | :-------------------------------------------------------------------------------------------------- |
+| Alessandra Ribeiro          | <https://github.com/alessandrarsouza/Trabfinal>                                                     |
+| Bruno César Pasquini        | <https://classroom.google.com/g/tg/MTM0ODAyNzk4Mjg4/MTU4NjI1MzAxOTU3?authuser=0#u=MTA2NjQ1MzYxMDla> |
+| Camila Bertini Martins      | <https://github.com/cabertinim/covid/blob/master/README.md>                                         |
+| Felipe L. Bhering           | <https://github.com/felipelbhering/201908-cursor4ds2-entrega-final>                                 |
+| Gabriela Caesar             | <https://github.com/gabrielacaesar/segurancaSP>                                                     |
+| Jean da Silva               | <https://github.com/ojeancarlo/pokemon4ds>                                                          |
+| Jéssica Luana Souza Cardoso | <https://github.com/JessyLSC/final_task>                                                            |
+| Katerine Linda Witkoski     | <https://github.com/katerine-dev/myfirstanalysis>                                                   |
+| Louise Mamedio              | <https://github.com/lomasch/projetor2>                                                              |
+| Lucas Guerra de Sant Ana    | <https://github.com/lucasguerra2998/CursoR---modulo2>                                               |
+| Luisa Gisele Böck           | <https://github.com/lgiselebock/FRIENDS>                                                            |
+| Carmen Neira                | <https://github.com/MCarmenNeira/NovoProjeto/blob/master/README.Rmd>                                |
+| Rafael Rocha                | <https://github.com/rocha02/Dados_ssp_sp>                                                           |
+| Rodrigo Dornelles           | <https://github.com/rfdornelles/TrabalhoFinal>                                                      |
+| Vinicius cardoso jacobs     | <https://github.com/ViniciusJacobs/analisecredito>                                                  |
